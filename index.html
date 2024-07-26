@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Calculate X</title>
+    <title>Convert interest and calculate</title>
 </head>
 <body>
-    <h2>Calculate X from Principal and Interest Rate</h2>
+    <h2>Convert from interest rate in percentage to Interest Rate in paise </h2>
     <form id="calculateForm">
         <label for="principal">Enter the principal amount (p): </label>
         <input type="number" id="principal" step="0.01" required>
@@ -12,10 +12,11 @@
         <label for="interest">Enter the annual interest rate (i) in percentage: </label>
         <input type="number" id="interest" step="0.01" required>
         <br><br>
-        <input type="button" value="Calculate X" onclick="calculateX()">
+        <input type="button" value="Calculate" onclick="calculateX()">
     </form>
     <br>
     <p id="result"></p>
+    <p id="newResult"></p>
 
     <script>
         function calculateX() {
@@ -26,11 +27,20 @@
             // Convert annual interest rate percentage to decimal
             var interestDecimal = interest / 100;
 
-            // Calculate the value of x
-            var x = (principal * interestDecimal / 12) / (principal / 100);
+            // Calculate monthly interest
+            var monthlyInterest = (principal * interestDecimal) / 12;
 
-            // Display the result
-            document.getElementById('result').innerText = "The value of x is: " + x.toFixed(2);
+            // Calculate the value of X as a percentage of the principal
+            var x = (monthlyInterest / principal) * 100;
+
+            // Display the original result
+            document.getElementById('result').innerText = "The interest in paise is: " + x.toFixed(2) + "";
+
+            // Calculate the new result: (principal / 100) * x
+            var newResultValue = (principal / 100) * x;
+
+            // Display the new result
+            document.getElementById('newResult').innerText = "The interest per month: " + newResultValue.toFixed(2);
         }
     </script>
 </body>
