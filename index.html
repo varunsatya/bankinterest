@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Convert interest and calculate</title>
+    <title>Convert Interest and Calculate</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .result-section {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Convert from interest rate in percentage to Interest Rate in paise </h2>
-    <form id="calculateForm">
-        <label for="principal">Enter the principal amount (p): </label>
-        <input type="number" id="principal" step="0.01" required>
-        <br><br>
-        <label for="interest">Enter the annual interest rate (i) in percentage: </label>
-        <input type="number" id="interest" step="0.01" required>
-        <br><br>
-        <input type="button" value="Calculate" onclick="calculateX()">
-    </form>
-    <br>
-    <p id="result"></p>
-    <p id="newResult"></p>
+    <div class="container">
+        <h2> Convert from interest rate in percentage to Interest Rate in paise </h2>
+        <form id="calculateForm">
+            <table>
+                <tr>
+                    <th><label for="principal">Principal Amount (p):</label></th>
+                    <td><input type="number" id="principal" step="0.01" required></td>
+                </tr>
+                <tr>
+                    <th><label for="interest">Annual Interest Rate (i) in %:</label></th>
+                    <td><input type="number" id="interest" step="0.01" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="button" value="Calculate" onclick="calculateX()">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="result-section">
+            <p id="result"></p>
+            <p id="newResult"></p>
+        </div>
+    </div>
 
     <script>
         function calculateX() {
@@ -27,20 +67,17 @@
             // Convert annual interest rate percentage to decimal
             var interestDecimal = interest / 100;
 
-            // Calculate monthly interest
-            var monthlyInterest = (principal * interestDecimal) / 12;
+            // Calculate monthly interest rate in percentage
+            var monthlyInterestPercent = (interestDecimal / 12) * 100;
 
-            // Calculate the value of X as a percentage of the principal
-            var x = (monthlyInterest / principal) * 100;
+            // Calculate the interest per month in terms of the principal
+            var monthlyInterestAmount = (principal * (monthlyInterestPercent / 100)).toFixed(2);
 
-            // Display the original result
-            document.getElementById('result').innerText = "The interest in paise is: " + x.toFixed(2) + "";
+            // Display the monthly interest rate as a percentage
+            document.getElementById('result').innerText = "Monthly Interest In Paise is: " + monthlyInterestPercent.toFixed(2) + "";
 
-            // Calculate the new result: (principal / 100) * x
-            var newResultValue = (principal / 100) * x;
-
-            // Display the new result
-            document.getElementById('newResult').innerText = "The interest per month: " + newResultValue.toFixed(2);
+            // Display the monthly interest amount
+            document.getElementById('newResult').innerText = "Interest Amount Per Month: " + monthlyInterestAmount;
         }
     </script>
 </body>
