@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert Interest and Calculate</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items at the top */
+            min-height: 100vh; /* Ensure the body takes full height */
+            margin: 0;
+            background-color: #f0f8ff; /* Light background color */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #fff;
+            border: 2px solid #ffa500; /* Orange border */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 400px; /* Increase the width of the container */
+            text-align: center;
+            margin-top: 40px; /* Add margin to move the table slightly down */
+        }
+        h2 {
+            color: #ffa500; /* Orange color */
+        }
+        table {
+            width: 100%;
+            margin-top: 20px; /* Adjust margin to move table slightly down */
+            border-spacing: 0 10px; /* Add spacing between rows */
+        }
+        th, td {
+            padding: 15px; /* Increase padding for a larger table */
+            text-align: left;
+        }
+        th {
+            background-color: #ffa500; /* Orange background for headers */
+            color: #fff; /* White text */
+        }
+        td {
+            background-color: #ffe4b5; /* Light orange background for data cells */
+        }
+        input[type="button"] {
+            background-color: #ffa500; /* Orange button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="button"]:hover {
+            background-color: #ff8c00; /* Darker orange on hover */
+        }
+        .result-section {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .result-section p {
+            background-color: #ffe4b5; /* Light orange background for results */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Convert Interest Rate to Paise</h2>
+        <form id="calculateForm">
+            <table>
+                <tr>
+                    <th><label for="principal">Principal Amount (p):</label></th>
+                    <td><input type="number" id="principal" step="0.01" required></td>
+                </tr>
+                <tr>
+                    <th><label for="interest">Annual Interest Rate (i) in %:</label></th>
+                    <td><input type="number" id="interest" step="0.01" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="button" value="Calculate" onclick="calculateX()">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="result-section">
+            <p id="result"></p>
+            <p id="newResult"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateX() {
+            // Get the values from the form
+            var principal = parseFloat(document.getElementById('principal').value);
+            var interest = parseFloat(document.getElementById('interest').value);
+
+            // Convert annual interest rate percentage to decimal
+            var interestDecimal = interest / 100;
+
+            // Calculate monthly interest rate in percentage
+            var monthlyInterestPercent = (interestDecimal / 12) * 100;
+
+            // Calculate the interest per month in terms of the principal
+            var monthlyInterestAmount = (principal * (monthlyInterestPercent / 100)).toFixed(2);
+
+            // Display the monthly interest rate as a percentage
+            document.getElementById('result').innerText = "Monthly Interest Rate: " + monthlyInterestPercent.toFixed(2) + "";
+
+            // Display the monthly interest amount
+            document.getElementById('newResult').innerText = "Interest Amount Per Month: " + monthlyInterestAmount;
+        }
+    </script>
+</body>
+</html>
