@@ -6,35 +6,65 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 50vh;
+            align-items: flex-start; /* Align items at the top */
+            min-height: 100vh; /* Ensure the body takes full height */
             margin: 0;
+            background-color: #f0f8ff; /* Light background color */
             font-family: Arial, sans-serif;
         }
         .container {
-            border: 1px solid #ccc;
+            background-color: #fff;
+            border: 2px solid #007bff; /* Blue border */
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #007bff; /* Blue color */
         }
         table {
             width: 100%;
+            margin-top: 10px;
         }
         th, td {
             padding: 10px;
             text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #007bff; /* Blue background for headers */
+            color: #fff; /* White text */
+        }
+        td {
+            background-color: #e9f1ff; /* Light blue background for data cells */
+        }
+        input[type="button"] {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
         }
         .result-section {
             margin-top: 20px;
+            text-align: left;
+        }
+        .result-section p {
+            background-color: #e9f1ff; /* Light blue background for results */
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2> Convert from interest rate in percentage to Interest Rate in paise </h2>
+        <h2>Convert Interest Rate to Paise</h2>
         <form id="calculateForm">
             <table>
                 <tr>
@@ -74,7 +104,7 @@
             var monthlyInterestAmount = (principal * (monthlyInterestPercent / 100)).toFixed(2);
 
             // Display the monthly interest rate as a percentage
-            document.getElementById('result').innerText = "Monthly Interest In Paise is: " + monthlyInterestPercent.toFixed(2) + "";
+            document.getElementById('result').innerText = "Monthly Interest Rate: " + monthlyInterestPercent.toFixed(2) + "";
 
             // Display the monthly interest amount
             document.getElementById('newResult').innerText = "Interest Amount Per Month: " + monthlyInterestAmount;
